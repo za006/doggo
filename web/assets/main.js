@@ -286,7 +286,7 @@ const apiURL = '/api/lookup/';
         try {
             const formData = collectFormData();
 
-            const req = await fetch('https://doggo.mrkaran.dev/api/lookup/', {
+            const req = await fetch('/api/lookup/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
