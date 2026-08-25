@@ -1,12 +1,19 @@
 export async function onRequestPost({ request }) {
-  const body = await request.json();
-  const r = await fetch('https://doggo.mrkaran.dev/api/lookup/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  });
-  return new Response(await r.text(), {
-    status: r.status,
-    headers: { 'Content-Type': 'application/json' }
-  });
+  try {
+    const body = await request.text();
+    const r = await fetch('https://doggo.mrkaran.dev/api/lookup/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body
+    });
+    return new Response(await r.text(), {
+      status: r.status,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  } catch (e) {
+    return new Response(JSON.stringify({ status: 'error', message: e.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 }
